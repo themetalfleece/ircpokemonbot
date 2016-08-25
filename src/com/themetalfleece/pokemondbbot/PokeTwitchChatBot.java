@@ -92,7 +92,7 @@ public class PokeTwitchChatBot extends GenericBot {
 			}
 			// info command
 			else if (message.equals(botConfig.commandInfo)) {
-				String info = "Pokemon Database Twitch Chat Bot. Type " + botConfig.commandCommands + " for available commands. Created by themetalfleece. Source and executable: www...";
+				String info = "Pokemon Database Twitch Chat Bot. Type " + botConfig.commandCommands + " for available commands. Created by themetalfleece. Source and executable: https://github.com/themetalfleece/ircpokemonbot";
 				sendMessageWithRequested(event, info);
 			}
 
