@@ -92,7 +92,8 @@ public class PokeTwitchChatBot extends GenericBot {
 			}
 			// info command
 			else if (message.equals(botConfig.commandInfo)) {
-				String info = "Pokemon Database Twitch Chat Bot. Type " + botConfig.commandCommands + " for available commands. Created by themetalfleece. Source and executable: https://github.com/themetalfleece/ircpokemonbot";
+				String info = "Pokemon Database Twitch Chat Bot. Type " + botConfig.commandCommands
+						+ " for available commands. Created by themetalfleece. Source and executable: https://github.com/themetalfleece/ircpokemonbot";
 				sendMessageWithRequested(event, info);
 			}
 
@@ -108,42 +109,44 @@ public class PokeTwitchChatBot extends GenericBot {
 	@Override
 	public void onUnknown(UnknownEvent event) {
 		// super.onUnknown(event);
-		if (event.getLine().toString().contains("WHISPER")) {
-			String messageText = event.getLine().toString().split("WHISPER")[1].split(":", 2)[1];
-			String user = event.getLine().toString().split(":")[1].split("!")[0];
+		if (botConfig.whispersEnabled) {
+			if (event.getLine().toString().contains("WHISPER")) {
+				String messageText = event.getLine().toString().split("WHISPER")[1].split(":", 2)[1];
+				String user = event.getLine().toString().split(":")[1].split("!")[0];
 
-			if (messageText.startsWith("!data ")) {
+				if (messageText.startsWith("!data ")) {
 
-				String name = messageText.split(" ", 2)[1];
-				String[] info = selector.getAnyInfoByName(name);
+					String name = messageText.split(" ", 2)[1];
+					String[] info = selector.getAnyInfoByName(name);
 
-				sendWhisper(user, info[1]);
-			} else if (messageText.startsWith("!egg ")) {
+					sendWhisper(user, info[1]);
+				} else if (messageText.startsWith("!egg ")) {
 
-				String[] names = messageText.split(" ", 2)[1].split(",");
-				String info;
-				if (names.length == 2) {
-					info = selector.getCommonEggGroupsByNames(names[0].trim(), names[1].trim());
-				} else {
-					info = "Command: !egg PokeName1, PokeName2";
+					String[] names = messageText.split(" ", 2)[1].split(",");
+					String info;
+					if (names.length == 2) {
+						info = selector.getCommonEggGroupsByNames(names[0].trim(), names[1].trim());
+					} else {
+						info = "Command: !egg PokeName1, PokeName2";
+					}
+
+					sendWhisper(user, info);
+				} else if (messageText.startsWith("!learn ")) {
+
+					String[] names = messageText.split(" ", 2)[1].split(",");
+					String info;
+					if (names.length == 2) {
+						info = selector.getLearnInfoByNamesInGivenGeneration(names[0].trim(), names[1].trim(),
+								botConfig.defaultGen);
+					} else if (names.length == 3) {
+						info = selector.getLearnInfoByNamesInGivenGeneration(names[0].trim(), names[1].trim(),
+								Integer.parseInt(names[2].trim()));
+					} else {
+						info = "Command: For current generation: !learn PokeName, MoveName OR for given generation: !learn PokeName, MoveName, GenerationNumber";
+					}
+
+					sendWhisper(user, info);
 				}
-
-				sendWhisper(user, info);
-			} else if (messageText.startsWith("!learn ")) {
-
-				String[] names = messageText.split(" ", 2)[1].split(",");
-				String info;
-				if (names.length == 2) {
-					info = selector.getLearnInfoByNamesInGivenGeneration(names[0].trim(), names[1].trim(),
-							botConfig.defaultGen);
-				} else if (names.length == 3) {
-					info = selector.getLearnInfoByNamesInGivenGeneration(names[0].trim(), names[1].trim(),
-							Integer.parseInt(names[2].trim()));
-				} else {
-					info = "Command: For current generation: !learn PokeName, MoveName OR for given generation: !learn PokeName, MoveName, GenerationNumber";
-				}
-
-				sendWhisper(user, info);
 			}
 		}
 	}

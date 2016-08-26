@@ -35,6 +35,7 @@ public class BotConfiguration {
 	String commandLearn;
 	String commandCommands;
 	String commandInfo;
+	boolean whispersEnabled;
 
 	public BotConfiguration() {
 
@@ -55,6 +56,7 @@ public class BotConfiguration {
 			commandLearn = getValueWithDefault("pokemon", "learn", "!learn");
 			commandCommands = getValueWithDefault("pokemon", "commands", "!commands");
 			commandInfo = getValueWithDefault("pokemon", "info", "!info");
+			whispersEnabled = getValueWithDefault("pokemon", "whispersEnabled", "t").charAt(0) == 't';
 
 		} catch (InvalidFileFormatException e) {
 			e.printStackTrace();
