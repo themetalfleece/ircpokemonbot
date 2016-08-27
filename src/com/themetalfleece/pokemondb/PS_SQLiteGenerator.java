@@ -9,10 +9,18 @@ package com.themetalfleece.pokemondb;
 *
 */
 
+/**
+ * 
+ * This code is really messy, but I couldn't find an easier way to parse JS
+ *  Will consider another ways if it no longer works with future PS database files
+ *  For the time being, you'll need to compile this yourself to create the database
+ *  
+ * 
+ */
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;

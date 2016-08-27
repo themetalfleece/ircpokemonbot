@@ -110,7 +110,7 @@ public class PS_SQLiteSelector {
 			return null;
 
 		}
-		
+
 		return info;
 
 	}
@@ -723,7 +723,12 @@ public class PS_SQLiteSelector {
 	private void openDatabase() throws SQLException, ClassNotFoundException {
 		System.out.println("Opening database...");
 		Class.forName("org.sqlite.JDBC");
-		c = DriverManager.getConnection("jdbc:sqlite:poke.db");
+		String className = this.getClass().getName().replace('.', '/');
+		String classJar = this.getClass().getResource("/" + className + ".class").toString();
+		if (classJar.startsWith("jar:"))
+			c = DriverManager.getConnection("jdbc:sqlite::resource:poke.db");
+		else
+			c = DriverManager.getConnection("jdbc:sqlite:res/poke.db");
 		c.createStatement();
 		System.out.println("Opened database successfully");
 	}

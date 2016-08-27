@@ -154,7 +154,7 @@ public class PokeTwitchChatBot extends GenericBot {
 	// send a message tagging the user who requested
 	private void sendMessageWithRequested(MessageEvent event, String info) {
 
-		String signature = " [ requested by @" + event.getUser().getNick() + " ]";
+		String signature = " [ @" + event.getUser().getNick() + " ]";
 		bot.sendIRC().message(botConfig.channel, info + signature);
 
 	}
@@ -180,7 +180,7 @@ public class PokeTwitchChatBot extends GenericBot {
 		bot.sendRaw().rawLine(("CAP REQ :twitch.tv/membership"));
 		bot.sendRaw().rawLine(("CAP REQ :twitch.tv/tags"));
 		bot.sendRaw().rawLine(("CAP REQ :twitch.tv/commands"));
-
+		
 	}
 
 	private void connectToDB() {

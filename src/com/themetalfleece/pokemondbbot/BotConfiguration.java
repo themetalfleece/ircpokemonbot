@@ -17,16 +17,16 @@ import org.ini4j.InvalidFileFormatException;
 
 public class BotConfiguration {
 
-	private Ini ini;
+	Ini ini;
 
-	// twitch
+	// connection
 	String channel;
 	String botName;
 	String serverHostname;
 	int serverPort;
 	String serverPassword;
 
-	// pokemon
+	// functionality
 	int defaultGen;
 	boolean modOnly;
 	long cooldownMillis;
@@ -36,20 +36,17 @@ public class BotConfiguration {
 	String commandCommands;
 	String commandInfo;
 	boolean whispersEnabled;
-
-	public BotConfiguration() {
-
-		try {
-			ini = new Ini(new File("config.ini"));
-
-			channel = ini.get("twitch", "channel").toString();
-			botName = ini.get("twitch", "botName").toString();
+	
+	public void assignValues() {
+			
+			channel = getValueWithDefault("twitch", "channel", "#channelname");
+			botName = getValueWithDefault("twitch", "botName", "botname");
 			serverHostname = getValueWithDefault("twitch", "serverHostname", "irc.chat.twitch.tv");
 			serverPort = Integer.parseInt(getValueWithDefault("twitch", "serverPort", "6667"));
-			serverPassword = ini.get("twitch", "serverPassword").toString();
+			serverPassword = getValueWithDefault("twitch", "serverPassword", "oauth:xxx");
 
 			defaultGen = Integer.parseInt(getValueWithDefault("pokemon", "defaultGen", "6"));
-			modOnly = getValueWithDefault("pokemon", "cooldownMillis", "f").charAt(0) == 't';
+			modOnly = getValueWithDefault("pokemon", "modOnly", "f").charAt(0) == 't';
 			cooldownMillis = Long.parseLong(getValueWithDefault("pokemon", "cooldownMillis", "15000"));
 			commandData = getValueWithDefault("pokemon", "data", "!data");
 			commandEgg = getValueWithDefault("pokemon", "egg", "!egg");
@@ -57,6 +54,21 @@ public class BotConfiguration {
 			commandCommands = getValueWithDefault("pokemon", "commands", "!commands");
 			commandInfo = getValueWithDefault("pokemon", "info", "!info");
 			whispersEnabled = getValueWithDefault("pokemon", "whispersEnabled", "t").charAt(0) == 't';
+
+
+	}
+
+	public BotConfiguration() {
+
+		try {
+//			String className = this.getClass().getName().replace('.', '/');
+//			String classJar =  this.getClass().getResource("/" + className + ".class").toString();
+//			if (classJar.startsWith("jar:")) 
+//				ini = new Ini(getClass().getResourceAsStream("/config.ini"));
+//			else
+			ini = new Ini(new File("./config.ini"));
+			
+			assignValues();
 
 		} catch (InvalidFileFormatException e) {
 			e.printStackTrace();

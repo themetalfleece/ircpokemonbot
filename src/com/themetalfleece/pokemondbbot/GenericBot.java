@@ -19,7 +19,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 
 public class GenericBot extends ListenerAdapter {
 	
-	static PircBotX bot;
+	PircBotX bot;
 
 	@SuppressWarnings("deprecation")
 	public GenericBot(BotConfiguration botConfig) throws IOException, IrcException {
