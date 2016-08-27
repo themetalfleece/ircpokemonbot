@@ -9,7 +9,11 @@ It uses [Pokemon Showdown's](https://github.com/Zarel/Pokemon-Showdown) database
 
 ## How to run
 
-Download the .jar and the .ini file [from here](https://github.com/themetalfleece/ircpokemonbot/raw/master/IRCPokemonBot_Runnable.jar) and here [and here](https://github.com/themetalfleece/ircpokemonbot/raw/master/config.ini) and place them in the same directory. Double click `IRCPokemonBot.jar` to run it (if it doesn't run, open it with JRE). You need to have Java Runtime Environment installed ([download here] (http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html)).
+Download the .jar and the .ini file by Right Click -> Save link as [from here](https://github.com/themetalfleece/ircpokemonbot/raw/master/IRCPokemonBot_Runnable.jar) and here [and here](https://github.com/themetalfleece/ircpokemonbot/raw/master/config.ini) and place them in the same directory. Double click `IRCPokemonBot_Runnable.jar` to run it (if it doesn't run, open it with JRE). You need to have Java Runtime Environment installed ([download here] (http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html)).
+
+**Note:** If you get an _Exeption_ when you start the Bot or the fields in the configuration screen are empty (instead of having their default values), try one of the following:
+1. Place both files in a directory that does not contain any special character (such as _C:\PokeBot_ or OS equivalent).
+2. Run the .jar by opening a command prompt/terminal in the directory where the files are located and run the following: `java -jar IRCPokemonBot_Runnable.jar`
 
 ### Configuration for Twitch
 
