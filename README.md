@@ -1,4 +1,7 @@
 # ircpokemonbot
+
+## Description
+
 Provides all the necessary Pokemon Info (about Pokemon, Items, Moves, Abilities and more).
 It responds to commands given by the users at a specific chat room. It has a **type prediction** feature so it will respond even if the used mistyped.
 _For example, a user can type **!data cherzard** and the Bot will respond with Charizard's Base Stats, Abilities, Weaknesses/Resistances etc. It also provides a Serebii and Smogon link for the requested object._
@@ -9,7 +12,7 @@ It uses [Pokemon Showdown's](https://github.com/Zarel/Pokemon-Showdown) database
 
 ## How to run
 
-Download the .jar and the .ini file by Right Click -> Save link as [from here](https://github.com/themetalfleece/ircpokemonbot/raw/master/IRCPokemonBot_Runnable.jar) and here [and here](https://github.com/themetalfleece/ircpokemonbot/raw/master/config.ini) and place them in the same directory. Double click `IRCPokemonBot_Runnable.jar` to run it (if it doesn't run, open it with JRE). You need to have Java Runtime Environment installed ([download here] (http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html)).
+Download the [.jar](https://github.com/themetalfleece/ircpokemonbot/raw/master/IRCPokemonBot_Runnable.jar) and the [.ini](https://github.com/themetalfleece/ircpokemonbot/raw/master/config.ini) file by _Right Click -> Save link as_ and place them in the same directory. Double click `IRCPokemonBot_Runnable.jar` to run it (if it doesn't run, open it with JRE). You need to have Java Runtime Environment installed ([download here] (http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html)).
 
 **Note:** If you get an _Exeption_ when you start the Bot or the fields in the configuration screen are empty (instead of having their default values), try one of the following:
 1. Place both files in a directory that does not contain any special character (such as _C:\PokeBot_ or OS equivalent).
