@@ -3,7 +3,7 @@
 ## Description
 
 Provides all the necessary Pokemon Info (about Pokemon, Items, Moves, Abilities and more).
-It responds to commands given by the users at a specific chat room. It has a **type prediction** feature so it will respond even if the used mistyped.
+It responds to commands given by the users at a specific chat room. It has a **type prediction** feature so it will respond even if the user mistyped.
 _For example, a user can type **!data cherzard** and the Bot will respond with Charizard's Base Stats, Abilities, Weaknesses/Resistance etc. It also provides a Serebii and Smogon link for the requested object._
 
 It uses [Pokemon Showdown's](https://github.com/Zarel/Pokemon-Showdown) database. This Bot will be able to provide info about the new games' database as soon as it's available on PS.
