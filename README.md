@@ -4,7 +4,7 @@
 
 Provides all the necessary Pokemon Info (about Pokemon, Items, Moves, Abilities and more).
 It responds to commands given by the users at a specific chat room. It has a **type prediction** feature so it will respond even if the used mistyped.
-_For example, a user can type **!data cherzard** and the Bot will respond with Charizard's Base Stats, Abilities, Weaknesses/Resistances etc. It also provides a Serebii and Smogon link for the requested object._
+_For example, a user can type **!data cherzard** and the Bot will respond with Charizard's Base Stats, Abilities, Weaknesses/Resistance etc. It also provides a Serebii and Smogon link for the requested object._
 
 It uses [Pokemon Showdown's](https://github.com/Zarel/Pokemon-Showdown) database. This Bot will be able to provide info about the new games' database as soon as it's available on PS.
 
@@ -14,13 +14,13 @@ It uses [Pokemon Showdown's](https://github.com/Zarel/Pokemon-Showdown) database
 
 Download the [.jar](https://github.com/themetalfleece/ircpokemonbot/raw/master/IRCPokemonBot_Runnable.jar) and the [.ini](https://github.com/themetalfleece/ircpokemonbot/raw/master/config.ini) file by _Right Click -> Save link as_ and place them in the same directory. Double click `IRCPokemonBot_Runnable.jar` to run it (if it doesn't run, open it with JRE). You need to have Java Runtime Environment installed ([download here] (http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html)).
 
-**Note:** If you get an _Exeption_ when you start the Bot or the fields in the configuration screen are empty (instead of having their default values), try one of the following:
+**Note:** If you get an _Exception_ when you start the Bot or the fields in the configuration screen are empty (instead of having their default values), try one of the following:
 1. Place both files in a directory that does not contain any special character (such as _C:\PokeBot_ or OS equivalent).
 2. Run the .jar by opening a command prompt/terminal in the directory where the files are located and run the following: `java -jar IRCPokemonBot_Runnable.jar`
 
 ### Configuration for Twitch
 
-Use a seperate Twitch account for your Bot.
+Use a separate Twitch account for your Bot.
 Press "Configure Bot" at the Main Menu.
 
 ![configuration](http://i.imgur.com/IfQBhon.png "Configucation")
@@ -33,7 +33,7 @@ Press "Configure Bot" at the Main Menu.
 | Server Port        | Leave as is for Twitch                                                                                      |
 | Server Password    | The oauth token of your Bot account. Get yours [here](http://www.twitchapps.com/tmi/)                       |
 | Commands           | How a Twitch chat message should start for the Bot to respond to it. See more info below                    |
-| Cooldown Milis     | A time period in milliseconds in which the the Bot will not respond to the same *data* commands             |
+| Cooldown Millis     | A time period in milliseconds in which the the Bot will not respond to the same *data* commands             |
 | Default Generation |  A Pokemon Generation the Bot will consider as default for the *learn* commands                             |
 | Mod Only           | If ticked, the Bot will only respond to commands by Mods                                                    |
 | Whispers Enabled   | If ticked, the Bot will respond to whispers. Since it's still experimental, disable if it gives you trouble |
