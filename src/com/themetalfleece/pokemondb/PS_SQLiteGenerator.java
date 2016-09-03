@@ -19,8 +19,9 @@ package com.themetalfleece.pokemondb;
  */
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -33,20 +34,41 @@ public class PS_SQLiteGenerator {
 	private String sql;
 	private Connection c = null;
 	private Statement stmt = null;
+	private String psGithubBegin = "https://github.com/Zarel/Pokemon-Showdown/raw/master/data/";
+	private String psGithubEnd = ".js";
 
 	private void createDB() throws SQLException {
 
 		try {
 
 			/* OPEN THE FILES */
-			System.out.println("Opening the files");
-			BufferedReader pokemonReader = new BufferedReader(new FileReader("psdb/pokedex.js"));
-			BufferedReader typesReader = new BufferedReader(new FileReader("psdb/typechart.js"));
-			BufferedReader abilitiesReader = new BufferedReader(new FileReader("psdb/abilities.js"));
-			BufferedReader movesReader = new BufferedReader(new FileReader("psdb/moves.js"));
-			BufferedReader itemsReader = new BufferedReader(new FileReader("psdb/items.js"));
-			BufferedReader learnsetsReader = new BufferedReader(new FileReader("psdb/learnsets.js"));
-			System.out.println("Files opened successfully");
+			System.out.println("Downloading files, please wait...");
+			// BufferedReader pokemonReader = new BufferedReader(new
+			// FileReader("psdb/pokedex.js"));
+			// BufferedReader typesReader = new BufferedReader(new
+			// FileReader("psdb/typechart.js"));
+			// BufferedReader abilitiesReader = new BufferedReader(new
+			// FileReader("psdb/abilities.js"));
+			// BufferedReader movesReader = new BufferedReader(new
+			// FileReader("psdb/moves.js"));
+			// BufferedReader itemsReader = new BufferedReader(new
+			// FileReader("psdb/items.js"));
+			// BufferedReader learnsetsReader = new BufferedReader(new
+			// FileReader("psdb/learnsets.js"));
+
+			BufferedReader pokemonReader = new BufferedReader(
+					new InputStreamReader(new URL(psGithubBegin + "pokedex" + psGithubEnd).openStream()));
+			BufferedReader typesReader = new BufferedReader(
+					new InputStreamReader(new URL(psGithubBegin + "typechart" + psGithubEnd).openStream()));
+			BufferedReader abilitiesReader = new BufferedReader(
+					new InputStreamReader(new URL(psGithubBegin + "abilities" + psGithubEnd).openStream()));
+			BufferedReader movesReader = new BufferedReader(
+					new InputStreamReader(new URL(psGithubBegin + "moves" + psGithubEnd).openStream()));
+			BufferedReader itemsReader = new BufferedReader(
+					new InputStreamReader(new URL(psGithubBegin + "items" + psGithubEnd).openStream()));
+			BufferedReader learnsetsReader = new BufferedReader(
+					new InputStreamReader(new URL(psGithubBegin + "learnsets" + psGithubEnd).openStream()));
+			System.out.println("Files downloaded successfully");
 
 			// DB drop tables if already exit
 			sql = "DROP TABLE IF EXISTS Types;";
@@ -671,4 +693,5 @@ public class PS_SQLiteGenerator {
 		}
 
 	}
+
 }

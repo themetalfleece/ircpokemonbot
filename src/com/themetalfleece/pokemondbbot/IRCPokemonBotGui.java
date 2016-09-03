@@ -25,8 +25,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
+import javax.swing.text.DefaultCaret;
 
 import org.pircbotx.exception.IrcException;
+
+import com.themetalfleece.pokemondb.PS_SQLiteGenerator;
 
 /**
  *
@@ -51,27 +54,30 @@ public class IRCPokemonBotGui extends JFrame {
 
 		JButton startBot = new JButton("Start Bot");
 		JButton configureBot = new JButton("Configure Bot");
+		JButton refreshDb = new JButton("Refresh Database");
 		startBot.setPreferredSize(configureBot.getPreferredSize());
 
 		textArea = new JTextArea();
+		JFrame runFrame = new JFrame("Pokemon Bot");
+		runFrame.setSize(600, 600);
+		runFrame.setVisible(true);
+		runFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+		textArea.setEditable(false);
+		textArea.setWrapStyleWord(true);
+		textArea.setLineWrap(true);
+
+		DefaultCaret caret = (DefaultCaret) textArea.getCaret();
+		caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
+		JScrollPane scrollPane = new JScrollPane(textArea);
+		runFrame.add(scrollPane);
+
+		new Thread(new outRedirector()).start();
+
 		startBot.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// dispose();
-				JFrame runFrame = new JFrame("Pokemon Bot");
-				runFrame.setSize(600, 600);
-				runFrame.setVisible(true);
-				runFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-				textArea.setEditable(false);
-				textArea.setWrapStyleWord(true);
-				textArea.setLineWrap(true);
-
-				JScrollPane scrollPane = new JScrollPane(textArea);
-				runFrame.add(scrollPane);
-
-				new Thread(new outRedirector()).start();
 
 				new Thread(new Runnable() {
 
@@ -102,11 +108,29 @@ public class IRCPokemonBotGui extends JFrame {
 			}
 		});
 
+		refreshDb.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				new Thread(new Runnable() {
+
+					@Override
+					public void run() {
+
+						new PS_SQLiteGenerator();
+
+					}
+				}).start();
+
+			}
+		});
+
 		add(startBot);
 		add(configureBot);
+		add(refreshDb);
 
 		setLocationRelativeTo(null);
-		setSize(340, 80);
+		setSize(340, 110);
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -181,7 +205,7 @@ public class IRCPokemonBotGui extends JFrame {
 				botConfig.ini.put("twitch", "serverHostname", serverHostnameField.getText());
 				botConfig.ini.put("twitch", "serverPort", Integer.parseInt(serverPortField.getText()));
 				botConfig.ini.put("twitch", "serverPassword", serverPasswordField.getText());
-				
+
 				botConfig.ini.put("pokemon", "defaultGen", Integer.parseInt(defaultGenField.getText()));
 				botConfig.ini.put("pokemon", "modOnly", (modOnlyBox.isSelected() ? "t" : "f"));
 				botConfig.ini.put("pokemon", "cooldownMillis", Long.parseLong(cooldownMillisField.getText()));
