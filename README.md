@@ -3,7 +3,7 @@
 ## Description
 
 Provides all the necessary Pokemon Info (about Pokemon, Items, Moves, Abilities and more).
-It responds to commands given by the users at a specific chat room. It has a **type prediction** feature so it will respond even if the user mistyped.
+It responds to commands given by the users at a specific chat room. It has a **typing prediction** feature so it will respond even if the user mistyped.
 _For example, a user can type **!data cherzard** and the Bot will respond with Charizard's Base Stats, Abilities, Weaknesses/Resistance etc. It also provides a Serebii and Smogon link for the requested object._
 
 It uses [Pokemon Showdown's](https://github.com/Zarel/Pokemon-Showdown) database. This Bot will be able to provide info about the new games' database as soon as it's available on PS.
@@ -12,7 +12,7 @@ It uses [Pokemon Showdown's](https://github.com/Zarel/Pokemon-Showdown) database
 
 ## How to run
 
-Download the [.jar](https://github.com/themetalfleece/ircpokemonbot/raw/master/IRCPokemonBot_Runnable.jar) and the [.ini](https://github.com/themetalfleece/ircpokemonbot/raw/master/config.ini) file by _Right Click -> Save link as_ and place them in the same directory. Double click `IRCPokemonBot_Runnable.jar` to run it (if it doesn't run, open it with JRE). You need to have Java Runtime Environment installed ([download here] (http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html)).
+Download [this file](https://github.com/themetalfleece/ircpokemonbot/raw/master/IRCPokemonBot.zip) and extract it. Make sure the 3 files are located in the same directory. Double click `IRCPokemonBot.jar` to run it (if it doesn't run, open it with JRE). You need to have Java Runtime Environment installed ([download here] (http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html)).
 
 **Note:** If you get an _Exception_ when you start the Bot or the fields in the configuration screen are empty (instead of having their default values), try one of the following:
 1. Place both files in a directory that does not contain any special character (such as _C:\PokeBot_ or OS equivalent).
@@ -48,3 +48,7 @@ Press "Configure Bot" at the Main Menu.
 | Learn    | Provides info about whether a **_Pokemon_** can learn a **_Move_** in the **_Given Generation_**| !learn pokeName, moveName, generation|
 | Commands | Provides info about the available commands and their syntax | !commands |
 | Info     | Provides info about the Bot (creator, github link). | !info |
+
+## Refresh Database
+
+By pressing the "Refresh Database" on the Main Menu, the application will download the latest Pokemon Showdown's files and update its database. You need to use it only when PS has modified its database.
