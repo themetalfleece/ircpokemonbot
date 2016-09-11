@@ -23,7 +23,7 @@ Download [this file](https://github.com/themetalfleece/ircpokemonbot/raw/master/
 Use a separate Twitch account for your Bot.
 Press "Configure Bot" at the Main Menu.
 
-![configuration](http://i.imgur.com/IfQBhon.png "Configucation")
+![configuration](http://i.imgur.com/2vOX4tv.png "Configucation")
 
 | Field         | Description                                                                                                      |
 | ------------- |:----------------------------------------------------------------------------------------------------------------:|
@@ -33,7 +33,8 @@ Press "Configure Bot" at the Main Menu.
 | Server Port        | Leave as is for Twitch                                                                                      |
 | Server Password    | The oauth token of your Bot account. Get yours [here](http://www.twitchapps.com/tmi/)                       |
 | Commands           | How a Twitch chat message should start for the Bot to respond to it. See more info below                    |
-| Cooldown Millis     | A time period in milliseconds in which the the Bot will not respond to the same *data* commands             |
+| Cooldown Millis    | A time period in milliseconds in which the the Bot will not respond to the same *data* commands             |
+| Whitelisted Users  | The bot will respond to these users even if they're not mods and the Bot runs in mod-only. Seperate them with comma (,) |
 | Default Generation |  A Pokemon Generation the Bot will consider as default for the *learn* commands                             |
 | Mod Only           | If ticked, the Bot will only respond to commands by Mods                                                    |
 | Whispers Enabled   | If ticked, the Bot will respond to whispers. Since it's still experimental, disable if it gives you trouble |
