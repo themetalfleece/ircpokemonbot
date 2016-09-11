@@ -170,6 +170,7 @@ public class IRCPokemonBotGui extends JFrame {
 		final JTextField commandCommandsField = new ConfigField(botConfig.commandCommands);
 		final JTextField commandInfoField = new ConfigField(botConfig.commandInfo);
 		final JTextField cooldownMillisField = new ConfigField(Long.toString(botConfig.cooldownMillis));
+		final JTextField whitelistRawField = new ConfigField(botConfig.whitelistRaw);
 
 		final JTextField defaultGenField = new JTextField(Integer.toString(botConfig.defaultGen), 2);
 		final JCheckBox modOnlyBox = new JCheckBox("", botConfig.modOnly);
@@ -185,6 +186,7 @@ public class IRCPokemonBotGui extends JFrame {
 		addLabelAndComponentToConfigFrame(configFrame, gc, new JLabel("Commands Command"), commandCommandsField);
 		addLabelAndComponentToConfigFrame(configFrame, gc, new JLabel("Info Command"), commandInfoField);
 		addLabelAndComponentToConfigFrame(configFrame, gc, new JLabel("Cooldown Millis"), cooldownMillisField);
+		addLabelAndComponentToConfigFrame(configFrame, gc, new JLabel("Whitelisted Users"), whitelistRawField);
 
 		gc.fill = GridBagConstraints.NONE;
 		gc.anchor = GridBagConstraints.WEST;
@@ -215,6 +217,7 @@ public class IRCPokemonBotGui extends JFrame {
 				botConfig.ini.put("pokemon", "learn", commandLearnField.getText());
 				botConfig.ini.put("pokemon", "commands", commandCommandsField.getText());
 				botConfig.ini.put("pokemon", "info", commandInfoField.getText());
+				botConfig.ini.put("pokemon", "whitelist", whitelistRawField.getText());
 
 				try {
 					botConfig.ini.store();
@@ -222,6 +225,7 @@ public class IRCPokemonBotGui extends JFrame {
 					JOptionPane.showMessageDialog(configFrame,
 							"Changes saved successfully.\nFunctionality changes have been applied, connection changes require program restart.",
 							"Success", JOptionPane.INFORMATION_MESSAGE);
+					configFrame.dispose();
 				} catch (IOException e1) {
 					JOptionPane.showMessageDialog(configFrame, "Error in saving changes.", "Error",
 							JOptionPane.ERROR_MESSAGE);
@@ -235,7 +239,7 @@ public class IRCPokemonBotGui extends JFrame {
 		configFrame.add(saveButton, gc);
 
 		configFrame.setSize(560, 560);
-		configFrame.setMinimumSize(new Dimension(560, 560));
+		configFrame.setMinimumSize(new Dimension(560, 600));
 		configFrame.setVisible(true);
 		configFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 

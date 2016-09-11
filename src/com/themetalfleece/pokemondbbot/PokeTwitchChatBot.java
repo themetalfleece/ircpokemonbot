@@ -30,9 +30,9 @@ public class PokeTwitchChatBot extends GenericBot {
 
 		// ~ symbol to allow comments
 		String message = event.getMessage().split("~")[0];
-
-		// check Mod-Only
-		if (!botConfig.modOnly || isOpByEvent(event)) {
+		
+		// non-modOnly always meets the condition. Being OP or whitelisted too
+		if (!botConfig.modOnly || isOpByEvent(event) || botConfig.whitelist.contains(event.getUser().getNick())) {
 
 			// data command
 			if (message.startsWith(botConfig.commandData + " ")) {
@@ -61,7 +61,7 @@ public class PokeTwitchChatBot extends GenericBot {
 				if (names.length == 2) {
 					info = selector.getCommonEggGroupsByNames(names[0].trim(), names[1].trim());
 				} else {
-					info = "Command: !egg PokeName1, PokeName2";
+					info = String.format("Command: %s PokeName1, PokeName2", botConfig.commandEgg);
 				}
 
 				sendMessageWithRequested(event, info);
@@ -78,16 +78,20 @@ public class PokeTwitchChatBot extends GenericBot {
 					info = selector.getLearnInfoByNamesInGivenGeneration(names[0].trim(), names[1].trim(),
 							Integer.parseInt(names[2].trim()));
 				} else {
-					info = "Command: For current generation: !learn PokeName, MoveName OR for given generation: !learn PokeName, MoveName, GenerationNumber";
+					info = String.format(
+							"Command: For current generation: %s PokeName, MoveName OR for given generation: %s PokeName, MoveName, GenerationNumber",
+							botConfig.commandLearn, botConfig.commandLearn);
 				}
 
 				sendMessageWithRequested(event, info);
 			}
 			// commands command
 			else if (message.equals(botConfig.commandCommands)) {
-				String commands = "Available Pokemon Commands | 1) Pokemon/Item/Move/Ability Info: !data Name | "
-						+ " 2) Same Egg Groups: !egg PokeName1, PokeName2 | "
-						+ " 3) If a Pokemon can learn a move: For current generation: !learn PokeName, MoveName OR for given generation: !learn PokeName, MoveName, GenerationNumber";
+				String commands = String.format(
+						"Available Pokemon Commands | 1) Pokemon/Item/Move/Ability Info: %s Name | "
+								+ " 2) Same Egg Groups: %s PokeName1, PokeName2 | "
+								+ " 3) If a Pokemon can learn a move: For current generation: %s PokeName, MoveName OR for given generation: %s PokeName, MoveName, GenerationNumber",
+						botConfig.commandData, botConfig.commandEgg, botConfig.commandLearn);
 				sendMessageWithRequested(event, commands);
 			}
 			// info command
@@ -104,7 +108,7 @@ public class PokeTwitchChatBot extends GenericBot {
 	// WHISPERS
 	/*
 	 * the code is rather messy since I couldn't figure out a better way for the
-	 * bot to get whispers, it should be working like this
+	 * bot to get whispers, it should be working like this for Twitch
 	 */
 	@Override
 	public void onUnknown(UnknownEvent event) {
@@ -180,7 +184,7 @@ public class PokeTwitchChatBot extends GenericBot {
 		bot.sendRaw().rawLine(("CAP REQ :twitch.tv/membership"));
 		bot.sendRaw().rawLine(("CAP REQ :twitch.tv/tags"));
 		bot.sendRaw().rawLine(("CAP REQ :twitch.tv/commands"));
-		
+
 	}
 
 	private void connectToDB() {

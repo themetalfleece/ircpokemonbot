@@ -13,7 +13,7 @@ public class IRCPokemonBot {
 
 	public static void main(String[] args) {
 		
-		IRCPokemonBotGui gui = new IRCPokemonBotGui();
+		new IRCPokemonBotGui();
 
 	}
 }

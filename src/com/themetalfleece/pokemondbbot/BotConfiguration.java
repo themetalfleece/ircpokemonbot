@@ -5,6 +5,7 @@ package com.themetalfleece.pokemondbbot;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import org.ini4j.Ini;
 import org.ini4j.InvalidFileFormatException;
@@ -36,38 +37,40 @@ public class BotConfiguration {
 	String commandCommands;
 	String commandInfo;
 	boolean whispersEnabled;
-	
+	String whitelistRaw;
+	ArrayList<String> whitelist = new ArrayList<String>();
+
 	public void assignValues() {
-			
-			channel = getValueWithDefault("twitch", "channel", "#channelname");
-			botName = getValueWithDefault("twitch", "botName", "botname");
-			serverHostname = getValueWithDefault("twitch", "serverHostname", "irc.chat.twitch.tv");
-			serverPort = Integer.parseInt(getValueWithDefault("twitch", "serverPort", "6667"));
-			serverPassword = getValueWithDefault("twitch", "serverPassword", "oauth:xxx");
 
-			defaultGen = Integer.parseInt(getValueWithDefault("pokemon", "defaultGen", "6"));
-			modOnly = getValueWithDefault("pokemon", "modOnly", "f").charAt(0) == 't';
-			cooldownMillis = Long.parseLong(getValueWithDefault("pokemon", "cooldownMillis", "15000"));
-			commandData = getValueWithDefault("pokemon", "data", "!data");
-			commandEgg = getValueWithDefault("pokemon", "egg", "!egg");
-			commandLearn = getValueWithDefault("pokemon", "learn", "!learn");
-			commandCommands = getValueWithDefault("pokemon", "commands", "!commands");
-			commandInfo = getValueWithDefault("pokemon", "info", "!info");
-			whispersEnabled = getValueWithDefault("pokemon", "whispersEnabled", "t").charAt(0) == 't';
+		channel = getValueWithDefault("twitch", "channel", "#channelname");
+		botName = getValueWithDefault("twitch", "botName", "botname");
+		serverHostname = getValueWithDefault("twitch", "serverHostname", "irc.chat.twitch.tv");
+		serverPort = Integer.parseInt(getValueWithDefault("twitch", "serverPort", "6667"));
+		serverPassword = getValueWithDefault("twitch", "serverPassword", "oauth:xxx");
 
+		defaultGen = Integer.parseInt(getValueWithDefault("pokemon", "defaultGen", "6"));
+		modOnly = getValueWithDefault("pokemon", "modOnly", "f").charAt(0) == 't';
+		cooldownMillis = Long.parseLong(getValueWithDefault("pokemon", "cooldownMillis", "15000"));
+		commandData = getValueWithDefault("pokemon", "data", "!data");
+		commandEgg = getValueWithDefault("pokemon", "egg", "!egg");
+		commandLearn = getValueWithDefault("pokemon", "learn", "!learn");
+		commandCommands = getValueWithDefault("pokemon", "commands", "!commands");
+		commandInfo = getValueWithDefault("pokemon", "info", "!info");
+		whispersEnabled = getValueWithDefault("pokemon", "whispersEnabled", "t").charAt(0) == 't';
+
+		whitelistRaw = ini.get("pokemon", "whitelist").toString();
+		String[] whitelistSplit = whitelistRaw.split(",");
+		for (int i = 0; i < whitelistSplit.length; i++) {
+			whitelist.add(whitelistSplit[i].trim().toLowerCase());
+		}
 
 	}
 
 	public BotConfiguration() {
 
 		try {
-//			String className = this.getClass().getName().replace('.', '/');
-//			String classJar =  this.getClass().getResource("/" + className + ".class").toString();
-//			if (classJar.startsWith("jar:")) 
-//				ini = new Ini(getClass().getResourceAsStream("/config.ini"));
-//			else
+
 			ini = new Ini(new File("./config.ini"));
-			
 			assignValues();
 
 		} catch (InvalidFileFormatException e) {
