@@ -38,7 +38,7 @@ public class BotConfiguration {
 	String commandInfo;
 	boolean whispersEnabled;
 	String whitelistRaw;
-	ArrayList<String> whitelist = new ArrayList<String>();
+	ArrayList<String> whitelist;
 
 	public void assignValues() {
 
@@ -58,6 +58,7 @@ public class BotConfiguration {
 		commandInfo = getValueWithDefault("pokemon", "info", "!info");
 		whispersEnabled = getValueWithDefault("pokemon", "whispersEnabled", "t").charAt(0) == 't';
 
+		whitelist = new ArrayList<String>();
 		whitelistRaw = ini.get("pokemon", "whitelist").toString();
 		String[] whitelistSplit = whitelistRaw.split(",");
 		for (int i = 0; i < whitelistSplit.length; i++) {
@@ -66,17 +67,19 @@ public class BotConfiguration {
 
 	}
 
-	public BotConfiguration() {
+	public BotConfiguration(String path) {
 
 		try {
 
-			ini = new Ini(new File("./config.ini"));
+			ini = new Ini(new File(path));
 			assignValues();
 
 		} catch (InvalidFileFormatException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println("Cannot open the config file " + path
+					+ ". Verify that it's in the path or specify the path with the \"-path path/to/config.ini\" argument.");
+			System.exit(0);
 		}
 	}
 

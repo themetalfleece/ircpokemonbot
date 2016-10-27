@@ -682,10 +682,14 @@ public class PS_SQLiteGenerator {
 	public PS_SQLiteGenerator() {
 
 		try {
-
+			
 			openDatabase();
 			createDB();
 			closeConnection();
+			System.err.println(
+					"***WARNING!*** refresh creates a memory leak. "
+					+ "Consider shutting down the application and running it again without refreshing "
+					+ "(the database had already been refreshed successfully!)");
 
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();

@@ -44,11 +44,13 @@ public class IRCPokemonBotGui extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	static JTextArea textArea;
-	final BotConfiguration botConfig = new BotConfiguration();
+	final BotConfiguration botConfig;
 
-	public IRCPokemonBotGui() {
+	public IRCPokemonBotGui(BotConfiguration config) {
 
 		super("Pokemon Bot Main Menu");
+		
+		botConfig = config;
 
 		setLayout(new FlowLayout());
 

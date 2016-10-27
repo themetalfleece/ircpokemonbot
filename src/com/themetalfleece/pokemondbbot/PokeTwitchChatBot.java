@@ -30,7 +30,7 @@ public class PokeTwitchChatBot extends GenericBot {
 
 		// ~ symbol to allow comments
 		String message = event.getMessage().split("~")[0];
-		
+
 		// non-modOnly always meets the condition. Being OP or whitelisted too
 		if (!botConfig.modOnly || isOpByEvent(event) || botConfig.whitelist.contains(event.getUser().getNick())) {
 
@@ -99,6 +99,70 @@ public class PokeTwitchChatBot extends GenericBot {
 				String info = "Pokemon Database Twitch Chat Bot. Type " + botConfig.commandCommands
 						+ " for available commands. Created by themetalfleece. Source and executable: https://github.com/themetalfleece/ircpokemonbot";
 				sendMessageWithRequested(event, info);
+			}
+			// commands for mods modifying the ini
+			// !pbconfig modOnly, t
+			else if (isOpByEvent(event)) {
+				String info = null;
+				if (message.startsWith("!pbconfig ")) {
+					String key = null;
+					String value = null;
+					try {
+						key = message.split(" ")[1];
+						value = message.split(" ")[2].trim();
+					} catch (java.lang.ArrayIndexOutOfBoundsException e) {
+						sendMessageWithRequested(event, "Invalid format. Correct format: !pbconfig field value | "
+								+ "Notice that you should include a space between \"pbconfig\", the field and the value");
+						return;
+					}
+					if (key.equals("add")) {
+						if (botConfig.whitelist.contains(value)) {
+							sendMessageWithRequested(event, "User " + value + " already in whitelist.");
+							return;
+						}
+						botConfig.ini.put("pokemon", "whitelist", botConfig.whitelistRaw + ", " + value);
+						info = "Successfully added user " + value + " to the whitelist.";
+					}
+					// TODO messy much?
+					else if (key.equals("remove")) {
+						String whitelistRaw = new String();
+						boolean first = true;
+						if (!botConfig.whitelist.contains(value.toLowerCase())){
+							sendMessageWithRequested(event, "User " + value + " is not whitelisted.");
+							return;
+						}
+						for (String name : botConfig.whitelist) {
+							if (!name.toLowerCase().equals(value)) {
+								whitelistRaw += (first ? "" : ", ") + name;
+								first = false;
+							}
+						}
+						
+						botConfig.ini.put("pokemon", "whitelist", whitelistRaw);
+						info = "Successfully removed user " + value + " from the whitelist.";
+					} else {
+						info = "Successfully modified field: " + key;
+						if (botConfig.ini.get("pokemon", key) != null) {
+							botConfig.ini.put("pokemon", key, value);
+
+						} else {
+							sendMessageWithRequested(event,
+									"Failed to modify field: " + key + ". Check if it's capitalized correctly");
+							return;
+						}
+					}
+
+					try {
+						botConfig.ini.store();
+						// TODO would be faster if assigned that single
+						// value
+						botConfig.assignValues();
+						sendMessageWithRequested(event, info);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+
+				}
 			}
 
 		}
