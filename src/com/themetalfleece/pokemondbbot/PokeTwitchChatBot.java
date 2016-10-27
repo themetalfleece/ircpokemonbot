@@ -90,8 +90,9 @@ public class PokeTwitchChatBot extends GenericBot {
 				String commands = String.format(
 						"Available Pokemon Commands | 1) Pokemon/Item/Move/Ability Info: %s Name | "
 								+ " 2) Same Egg Groups: %s PokeName1, PokeName2 | "
-								+ " 3) If a Pokemon can learn a move: For current generation: %s PokeName, MoveName OR for given generation: %s PokeName, MoveName, GenerationNumber",
-						botConfig.commandData, botConfig.commandEgg, botConfig.commandLearn);
+								+ " 3) If a Pokemon can learn a move: For current generation: %s PokeName, MoveName OR for given generation: %s PokeName, MoveName, GenerationNumber | "
+								+ "Mod-only commands: https://github.com/themetalfleece/ircpokemonbot/blob/master/README.md#mod-commands-for-modifying-the-config-file",
+						botConfig.commandData, botConfig.commandEgg, botConfig.commandLearn, botConfig.commandLearn);
 				sendMessageWithRequested(event, commands);
 			}
 			// info command
@@ -104,7 +105,7 @@ public class PokeTwitchChatBot extends GenericBot {
 			// !pbconfig modOnly, t
 			else if (isOpByEvent(event)) {
 				String info = null;
-				if (message.startsWith("!pbconfig ")) {
+				if (message.startsWith("!pbconfig")) {
 					String key = null;
 					String value = null;
 					try {
@@ -112,7 +113,7 @@ public class PokeTwitchChatBot extends GenericBot {
 						value = message.split(" ")[2].trim();
 					} catch (java.lang.ArrayIndexOutOfBoundsException e) {
 						sendMessageWithRequested(event, "Invalid format. Correct format: !pbconfig field value | "
-								+ "Notice that you should include a space between \"pbconfig\", the field and the value");
+								+ "Notice that you should include a space between \"pbconfig\", the field and the value. More info: https://github.com/themetalfleece/ircpokemonbot/blob/master/README.md#mod-commands-for-modifying-the-config-file");
 						return;
 					}
 					if (key.equals("add")) {
@@ -147,7 +148,7 @@ public class PokeTwitchChatBot extends GenericBot {
 
 						} else {
 							sendMessageWithRequested(event,
-									"Failed to modify field: " + key + ". Check if it's capitalized correctly");
+									"Failed to modify field: " + key + ". Check if its case matches.");
 							return;
 						}
 					}
