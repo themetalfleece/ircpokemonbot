@@ -22,11 +22,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import com.themetalfleece.pokemondbbot.BotConfiguration;
+
 public class PS_SQLiteSelector {
 
 	private PreparedStatement prep;
 	private ResultSet rs;
 	private Connection c = null;
+	
+	final BotConfiguration botConfig;
 
 	// for similarityMode
 	private HashMap<String, String> allPokes = new HashMap<String, String>();
@@ -34,13 +38,13 @@ public class PS_SQLiteSelector {
 	private HashMap<String, String> allItems = new HashMap<String, String>();
 	private HashMap<String, String> allAbilities = new HashMap<String, String>();
 
-	// lings
-	private String serebiiBegin = "www.serebii.net/pokedex-xy/";
+	// links
+	private String serebiiBegin;
 	private String serebiiEnd = ".shtml";
-	private String smogonPokemonBegin = "www.smogon.com/dex/xy/pokemon/";
-	private String smogonMoveBegin = "www.smogon.com/dex/xy/moves/";
-	private String smogonItemBegin = "www.smogon.com/dex/xy/items/";
-	private String smogonAbilityBegin = "www.smogon.com/dex/xy/abilities/";
+	private String smogonPokemonBegin;
+	private String smogonMoveBegin;
+	private String smogonItemBegin;
+	private String smogonAbilityBegin;
 	private String smogonEnd = "/";
 
 	// searches specific Map
@@ -763,8 +767,17 @@ public class PS_SQLiteSelector {
 
 	}
 
-	public PS_SQLiteSelector() {
-
+	public PS_SQLiteSelector(BotConfiguration botConfig) {
+		
+		this.botConfig = botConfig;
+		serebiiBegin = "www.serebii.net/pokedex-"+botConfig.generationLetters+"/";
+		serebiiEnd = ".shtml";
+		smogonPokemonBegin = "www.smogon.com/dex/"+botConfig.generationLetters+"/pokemon/";
+		smogonMoveBegin = "www.smogon.com/dex/"+botConfig.generationLetters+"/moves/";
+		smogonItemBegin = "www.smogon.com/dex/"+botConfig.generationLetters+"/items/";
+		smogonAbilityBegin = "www.smogon.com/dex/"+botConfig.generationLetters+"/abilities/";
+		smogonEnd = "/";
+		
 		try {
 			openDatabase();
 

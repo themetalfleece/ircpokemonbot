@@ -254,7 +254,7 @@ public class PokeTwitchChatBot extends GenericBot {
 
 	private void connectToDB() {
 
-		selector = new PS_SQLiteSelector();
+		selector = new PS_SQLiteSelector(botConfig);
 
 	}
 

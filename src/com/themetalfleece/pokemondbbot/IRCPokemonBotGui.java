@@ -175,6 +175,7 @@ public class IRCPokemonBotGui extends JFrame {
 		final JTextField whitelistRawField = new ConfigField(botConfig.whitelistRaw);
 
 		final JTextField defaultGenField = new JTextField(Integer.toString(botConfig.defaultGen), 2);
+		final JTextField generationLettersField = new JTextField(botConfig.generationLetters, 8);
 		final JCheckBox modOnlyBox = new JCheckBox("", botConfig.modOnly);
 		final JCheckBox whispersEnabledBox = new JCheckBox("", botConfig.whispersEnabled);
 
@@ -193,6 +194,7 @@ public class IRCPokemonBotGui extends JFrame {
 		gc.fill = GridBagConstraints.NONE;
 		gc.anchor = GridBagConstraints.WEST;
 		addLabelAndComponentToConfigFrame(configFrame, gc, new JLabel("Default Generation"), defaultGenField);
+		addLabelAndComponentToConfigFrame(configFrame, gc, new JLabel("Generation Letters"), generationLettersField);
 		addLabelAndComponentToConfigFrame(configFrame, gc, new JLabel("Mod only"), modOnlyBox);
 		addLabelAndComponentToConfigFrame(configFrame, gc, new JLabel("Whispers Enabled"), whispersEnabledBox);
 
@@ -220,6 +222,7 @@ public class IRCPokemonBotGui extends JFrame {
 				botConfig.ini.put("pokemon", "commands", commandCommandsField.getText());
 				botConfig.ini.put("pokemon", "info", commandInfoField.getText());
 				botConfig.ini.put("pokemon", "whitelist", whitelistRawField.getText());
+				botConfig.ini.put("pokemon", "generationLetters", generationLettersField.getText());
 
 				try {
 					botConfig.ini.store();
@@ -240,7 +243,7 @@ public class IRCPokemonBotGui extends JFrame {
 		gc.gridy++;
 		configFrame.add(saveButton, gc);
 
-		configFrame.setSize(560, 560);
+		configFrame.setSize(560, 650);
 		configFrame.setMinimumSize(new Dimension(560, 600));
 		configFrame.setVisible(true);
 		configFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);

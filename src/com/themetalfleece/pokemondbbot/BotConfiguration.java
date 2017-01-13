@@ -39,6 +39,7 @@ public class BotConfiguration {
 	boolean whispersEnabled;
 	String whitelistRaw;
 	ArrayList<String> whitelist;
+	public String generationLetters;
 
 	public void assignValues() {
 
@@ -57,6 +58,7 @@ public class BotConfiguration {
 		commandCommands = getValueWithDefault("pokemon", "commands", "!commands");
 		commandInfo = getValueWithDefault("pokemon", "info", "!info");
 		whispersEnabled = getValueWithDefault("pokemon", "whispersEnabled", "t").charAt(0) == 't';
+		generationLetters = getValueWithDefault("pokemon", "generationLetters", "sm");
 
 		whitelist = new ArrayList<String>();
 		whitelistRaw = ini.get("pokemon", "whitelist").toString();
