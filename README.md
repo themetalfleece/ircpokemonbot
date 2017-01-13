@@ -40,6 +40,7 @@ Press "Configure Bot" at the Main Menu.
 | Cooldown Millis    | A time period in milliseconds in which the the Bot will not respond to the same *data* commands             |
 | Whitelisted Users  | The bot will respond to these users even if they're not mods and the Bot runs in mod-only. Seperate them with comma (,) |
 | Default Generation |  A Pokemon Generation the Bot will consider as default for the *learn* commands                             |
+| Generation Letters |  The letters for the target generation, as they are used by serebii and smogon (i.e. *xy* or *sm*)                             |
 | Mod Only           | If ticked, the Bot will only respond to commands by Mods                                                    |
 | Whispers Enabled   | If ticked, the Bot will respond to whispers. Since it's still experimental, disable if it gives you trouble |
 
